@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Scrape Youtube</h1>
+
+    <h3>Add A Creator</h3>
+    <input class="creator-input" type="text" placeholder="Enter YouTube URL" />
+    <button type="submit" onclick="submitChannel()">submit</button>
+
+    <div class="container"></div>
+    <script>
+
+        function subChannel() {
+            const channelValue = document.querySelector('.creator-input').value;
+        }
+
+        function newEl(type, attrs={}) {
+            const el = document.createElement(type);
+            for (let attr in attrs) {
+                const value = attrs[attr];
+                if (attr == 'innerText') el.innerText = value;
+                else el.setAttribute(attr, value);
+            }
+            return el;
+        }
+
+        const creators = [
+            {name: 'Jenna Marbles', img: 'https://'},
+            {name: 'Julien Solometa', img: 'https://'},
+            {name: 'Danny Gonzales', img: 'https://'}
+        ]
+
+        const str = document.querySelector('.container');
+
+        creators.forEach(creator => {
+            const card = newAEl('div', {class: 'card'});
+            const title = newEl('h4', {innerText: creator.name});
+            const img = newEl('img', {src: creator.img});
+            card.appendChild(title);
+            card.appendChild(img)
+            ctr.appendChild(card);
+        })
+
+        const ctr = document.querySelector('.container');
+        const card = newEl('div', {class:'card'});
+        ctr.appendChild(card);
+
+    </script>
+
+    <style>
+        .container {
+            display: flex;
+            background-color: grey;
+        }
+
+        .card {
+            margin: 20px;
+            padding: 20px;
+            background-color: aqua;     
+            }
+    </style>
+</body>
+</html>
