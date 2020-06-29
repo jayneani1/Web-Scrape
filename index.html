@@ -16,6 +16,13 @@
 
         function subChannel() {
             const channelValue = document.querySelector('.creator-input').value;
+            fetch('http://localhost: 3000/creators', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({channelURL})
+            })
         }
 
         function newEl(type, attrs={}) {
@@ -28,22 +35,23 @@
             return el;
         }
 
-        const creators = [
-            {name: 'Jenna Marbles', img: 'https://'},
-            {name: 'Julien Solometa', img: 'https://'},
-            {name: 'Danny Gonzales', img: 'https://'}
-        ]
+        async function loadCreators() {
+            const res = await fetch('http://localhost:3000/creators');
+            const creators = await res.json();
 
-        const str = document.querySelector('.container');
+            const ctr = document.querySelector('.container');
 
-        creators.forEach(creator => {
-            const card = newAEl('div', {class: 'card'});
-            const title = newEl('h4', {innerText: creator.name});
-            const img = newEl('img', {src: creator.img});
-            card.appendChild(title);
-            card.appendChild(img)
-            ctr.appendChild(card);
-        })
+            creators.forEach(creator => {
+                const card = newAEl('div', {class: 'card'});
+                const title = newEl('h4', {innerText: creator.name});
+                const img = newEl('img', {src: creator.img});
+                card.appendChild(title);
+                card.appendChild(img)
+                ctr.appendChild(card);
+            })
+        }
+
+        loadCreators();
 
         const ctr = document.querySelector('.container');
         const card = newEl('div', {class:'card'});
